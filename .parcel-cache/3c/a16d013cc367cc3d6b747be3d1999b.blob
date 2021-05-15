@@ -1,0 +1,164 @@
+"use strict";
+var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.default = void 0;
+  var _react = _interopRequireWildcard(require("react"));
+  var _Results = _interopRequireDefault(require("./Results"));
+  var _useBreedList = _interopRequireDefault(require("./useBreedList"));
+  var _ThemeContext = _interopRequireDefault(require("./ThemeContext"));
+  var _jsxRuntime = require("react/jsx-runtime");
+  var _s = $RefreshSig$();
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {
+      default: obj
+    };
+  }
+  function _getRequireWildcardCache(nodeInterop) {
+    if (typeof WeakMap !== "function") return null;
+    var cacheBabelInterop = new WeakMap();
+    var cacheNodeInterop = new WeakMap();
+    return (_getRequireWildcardCache = function (nodeInterop) {
+      return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+    })(nodeInterop);
+  }
+  function _interopRequireWildcard(obj, nodeInterop) {
+    if (!nodeInterop && obj && obj.__esModule) {
+      return obj;
+    }
+    if (obj === null || typeof obj !== "object" && typeof obj !== "function") {
+      return {
+        default: obj
+      };
+    }
+    var cache = _getRequireWildcardCache(nodeInterop);
+    if (cache && cache.has(obj)) {
+      return cache.get(obj);
+    }
+    var newObj = {};
+    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
+    for (var key in obj) {
+      if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+        var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
+        if (desc && (desc.get || desc.set)) {
+          Object.defineProperty(newObj, key, desc);
+        } else {
+          newObj[key] = obj[key];
+        }
+      }
+    }
+    newObj.default = obj;
+    if (cache) {
+      cache.set(obj, newObj);
+    }
+    return newObj;
+  }
+  const ANIMALS = ['bird', 'cat', 'dog', 'rabbit', 'reptile'];
+  const SearchParams = () => {
+    _s();
+    const [location, updateLocation] = (0, _react.useState)('Seattle, WA');
+    const [animal, updateAnimal] = (0, _react.useState)('');
+    const [breed, updateBreed] = (0, _react.useState)('');
+    const [pets, setPets] = (0, _react.useState)([]);
+    const [breeds] = (0, _useBreedList.default)(animal);
+    const [theme, setTheme] = (0, _react.useContext)(_ThemeContext.default);
+    (0, _react.useEffect)(() => {
+      requestPets();
+    }, []);
+    // eslint-disable-line react-hooks/exhaustive-deps
+    async function requestPets() {
+      const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
+      const json = await res.json();
+      setPets(json.pets);
+    }
+    return (
+      /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "search-params",
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("form", {
+          onSubmit: e => {
+            e.preventDefault();
+            requestPets();
+          },
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            htmlFor: "location",
+            children: ["Location", /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+              id: "location",
+              value: location,
+              placeholder: "Location",
+              onChange: e => updateLocation(e.target.value)
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            htmlFor: "animal",
+            children: ["Animal", /*#__PURE__*/(0, _jsxRuntime.jsxs)("select", {
+              id: "animal",
+              value: animal,
+              onChange: e => updateAnimal(e.target.value),
+              onBlur: e => updateAnimal(e.target.value),
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("option", {}), ANIMALS.map(animal => /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: animal,
+                children: animal
+              }, animal))]
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            htmlFor: "breed",
+            children: ["Breed", /*#__PURE__*/(0, _jsxRuntime.jsxs)("select", {
+              disabled: !breeds.length,
+              id: "breed",
+              value: breed,
+              onChange: e => updateBreed(e.target.value),
+              onBlur: e => updateBreed(e.target.value),
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("option", {}), breeds.map(breed => /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: breed,
+                children: breed
+              }, breed))]
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            htmlFor: "theme",
+            children: ["Theme", /*#__PURE__*/(0, _jsxRuntime.jsxs)("select", {
+              value: theme,
+              onChange: e => setTheme(e.target.value),
+              onBlur: e => setTheme(e.target.value),
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: "peru",
+                children: "Peru"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: "darkblue",
+                children: "Dark Blue"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: "chartreuse",
+                children: "Chartreuse"
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("option", {
+                value: "mediumorchid",
+                children: "Medium Orchid"
+              })]
+            })]
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            style: {
+              backgroundColor: theme
+            },
+            children: "Submit"
+          })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Results.default, {
+          pets: pets
+        })]
+      })
+    );
+  };
+  _s(SearchParams, "DqHQbns4QKE8x6Mx8bvQFGHzl2U=", false, function () {
+    return [_useBreedList.default];
+  });
+  _c = SearchParams;
+  var _default = SearchParams;
+  exports.default = _default;
+  var _c;
+  $RefreshReg$(_c, "SearchParams");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

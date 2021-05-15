@@ -1,0 +1,18 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _reactJsxRuntime = require("react/jsx-runtime");
+var _s = $RefreshSig$();
+const Details = () => {
+  _s();
+  const {id} = useParams();
+  return (
+    /*#__PURE__*/_reactJsxRuntime.jsx("h2", {
+      children: id
+    })
+  );
+};
+_s(Details, "r5uZNI/QgQLJ6YUN+rmQ/OIgZ/k=", true);
+_c = Details;
+exports.default = Details;
+var _c;
+$RefreshReg$(_c, "Details");
